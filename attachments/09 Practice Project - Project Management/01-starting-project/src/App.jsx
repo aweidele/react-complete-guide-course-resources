@@ -1,13 +1,9 @@
 import Sidebar from "./components/Sidebar";
 function App() {
   return (
-    <main>
-      <div class="flex gap-6">
-        <div class="w-4/12">
-          <Sidebar />
-        </div>
-        <div class="w-5/12">Hello.</div>
-      </div>
+    <main class="h-screen flex gap-6">
+      <Sidebar />
+      <div class="w-5/12">Hello.</div>
     </main>
   );
 }
