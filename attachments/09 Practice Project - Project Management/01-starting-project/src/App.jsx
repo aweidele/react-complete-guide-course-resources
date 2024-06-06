@@ -1,8 +1,14 @@
+import Sidebar from "./components/Sidebar";
 function App() {
   return (
-    <>
-      <h1 className="my-8 text-center text-5xl font-bold">Hello World</h1>
-    </>
+    <main>
+      <div class="flex gap-6">
+        <div class="w-4/12">
+          <Sidebar />
+        </div>
+        <div class="w-5/12">Hello.</div>
+      </div>
+    </main>
   );
 }
 
