@@ -1,9 +1,12 @@
 import Sidebar from "./components/Sidebar";
+import NewProject from "./components/NewProject";
 function App() {
   return (
-    <main class="h-screen flex gap-6">
+    <main className="h-screen flex gap-6 pt-8">
       <Sidebar />
-      <div class="w-5/12">Hello.</div>
+      <div className="w-7/12">
+        <NewProject />
+      </div>
     </main>
   );
 }
