@@ -7,9 +7,11 @@ export default function Sidebar({ onStartAddProject, projects }) {
       <div>
         <Button onClick={onStartAddProject}>+ Add Project</Button>
       </div>
-      <ul>
+      <ul class="my-8">
         {projects.map((project) => (
-          <li>{project.title}</li>
+          <li key={project.id}>
+            <button className="w-full text-left px-2 py-1 rounded-sm my-1 text-slate-400 hover:text-slate-200 hover:bg-slate-800">{project.title}</button>
+          </li>
         ))}
       </ul>
     </aside>
