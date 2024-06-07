@@ -5,6 +5,37 @@ import NewProject from "./components/NewProject";
 
 function App() {
   const [mode, setMode] = useState("no-project");
+  const [projectsState, setProjectsState] = useState({
+    selectedProjectId: undefined,
+    projects: [],
+  });
+
+  function handleStartAddProject() {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: null,
+      };
+    });
+  }
+
+  function handleCancelAddProject() {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+      };
+    });
+  }
+
+  function handleSaveAddProject() {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+      };
+    });
+  }
 
   function changeMode(mode) {
     setMode((oldMode) => mode);
@@ -12,10 +43,10 @@ function App() {
 
   return (
     <main className="h-screen flex gap-6 pt-8">
-      <Sidebar onChangeMode={changeMode} />
+      <Sidebar onChangeMode={changeMode} onStartAddProject={handleStartAddProject} />
       <div className="w-7/12">
-        {mode === "no-project" && <NoProject onChangeMode={changeMode} />}
-        {mode === "new-project" && <NewProject onChangeMode={changeMode} />}
+        {projectsState.selectedProjectId === undefined && <NoProject onStartAddProject={handleStartAddProject} />}
+        {projectsState.selectedProjectId === null && <NewProject onSaveAddProject={handleSaveAddProject} onCancelAddProject={handleCancelAddProject} />}
       </div>
     </main>
   );

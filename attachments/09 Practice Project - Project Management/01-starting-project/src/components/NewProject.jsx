@@ -1,14 +1,14 @@
 import Button from "./Button";
 import Input from "./Input";
 
-export default function NewProject({ onChangeMode }) {
+export default function NewProject({ onSaveAddProject, onCancelAddProject }) {
   return (
     <div class="mt-8">
       <menu className="flex justify-end gap-2 my-4">
-        <Button secondary action={() => onChangeMode("no-project")}>
+        <Button secondary onClick={onCancelAddProject}>
           Cancel
         </Button>
-        <Button>Save</Button>
+        <Button onClick={onSaveAddProject}>Save</Button>
       </menu>
       <Input label="Title" />
       <Input multiline label="Description" />
