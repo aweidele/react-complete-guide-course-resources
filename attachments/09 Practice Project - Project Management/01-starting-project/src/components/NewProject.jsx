@@ -21,10 +21,6 @@ export default function NewProject({ onSaveAddProject, onCancelAddProject }) {
     date.current.value = "";
   }
 
-  function closeModal() {
-    dialog.current.close();
-  }
-
   return (
     <>
       <div class="mt-8">
@@ -38,9 +34,8 @@ export default function NewProject({ onSaveAddProject, onCancelAddProject }) {
         <Input ref={description} multiline label="Description" />
         <Input ref={date} type="date" label="Due Date" />
       </div>
-      <Modal ref={dialog}>
+      <Modal ref={dialog} buttonLabel="Okay">
         <p>You need to fill out all the fields.</p>
-        <Button onClick={closeModal}>Ok.</Button>
       </Modal>
     </>
   );
