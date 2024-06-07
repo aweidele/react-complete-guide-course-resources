@@ -28,22 +28,29 @@ function App() {
     });
   }
 
-  function handleSaveAddProject() {
+  function handleSaveAddProject(title, description, date) {
     setProjectsState((prevState) => {
       return {
         ...prevState,
         selectedProjectId: undefined,
+        projects: [
+          ...prevState.projects,
+          {
+            title: title,
+            description: description,
+            date: date,
+            id: Math.random(),
+          },
+        ],
       };
     });
   }
 
-  function changeMode(mode) {
-    setMode((oldMode) => mode);
-  }
+  const { projects } = projectsState;
 
   return (
     <main className="h-screen flex gap-6 pt-8">
-      <Sidebar onChangeMode={changeMode} onStartAddProject={handleStartAddProject} />
+      <Sidebar onStartAddProject={handleStartAddProject} projects={projects} />
       <div className="w-7/12">
         {projectsState.selectedProjectId === undefined && <NoProject onStartAddProject={handleStartAddProject} />}
         {projectsState.selectedProjectId === null && <NewProject onSaveAddProject={handleSaveAddProject} onCancelAddProject={handleCancelAddProject} />}
