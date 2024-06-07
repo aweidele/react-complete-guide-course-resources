@@ -2,11 +2,6 @@ import { forwardRef } from "react";
 import Button from "./Button";
 
 const Modal = forwardRef(function Modal({ children, buttonLabel = "Close" }, ref) {
-  console.log(ref);
-  function closeModal() {
-    ref.current.close();
-  }
-
   return (
     <dialog ref={ref} className="p-8 backdrop:bg-slate-900/80">
       {children}
