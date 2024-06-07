@@ -2,6 +2,7 @@ import { useRef } from "react";
 
 import Button from "./Button";
 import Input from "./Input";
+import Modal from "./Modal";
 
 export default function NewProject({ onSaveAddProject, onCancelAddProject }) {
   const title = useRef();
@@ -21,7 +22,7 @@ export default function NewProject({ onSaveAddProject, onCancelAddProject }) {
   }
 
   function closeModal() {
-    dialog.current.closeModal();
+    dialog.current.close();
   }
 
   return (
@@ -37,10 +38,10 @@ export default function NewProject({ onSaveAddProject, onCancelAddProject }) {
         <Input ref={description} multiline label="Description" />
         <Input ref={date} type="date" label="Due Date" />
       </div>
-      <dialog ref={dialog}>
-        You need to fill out all the fields.
+      <Modal ref={dialog}>
+        <p>You need to fill out all the fields.</p>
         <Button onClick={closeModal}>Ok.</Button>
-      </dialog>
+      </Modal>
     </>
   );
 }
