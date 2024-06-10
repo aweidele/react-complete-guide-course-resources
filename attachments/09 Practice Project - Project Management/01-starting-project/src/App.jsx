@@ -101,8 +101,18 @@ function App() {
           {
             name: name,
             project: prevState.selectedProjectId,
+            id: Math.random(),
           },
         ],
+      };
+    });
+  }
+
+  function handleDeleteTask(taskId) {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((task) => task.id !== taskId),
       };
     });
   }
@@ -116,7 +126,7 @@ function App() {
     content = <NewProject onSaveAddProject={handleSaveAddProject} onCancelAddProject={handleCancelAddProject} />;
   } else {
     const currentProject = projects.find((project) => project.id === projectsState.selectedProjectId);
-    content = <SelectedProject project={currentProject} tasks={tasks} onDelete={handleDeleteProject} onAddTask={handleAddTask} />;
+    content = <SelectedProject project={currentProject} tasks={tasks} onDelete={handleDeleteProject} onAddTask={handleAddTask} onDeleteTask={handleDeleteTask} />;
   }
 
   return (
