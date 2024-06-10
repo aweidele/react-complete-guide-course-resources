@@ -5,10 +5,35 @@ import NewProject from "./components/NewProject";
 import SelectedProject from "./components/SelectedProject";
 
 function App() {
+  const defaultProjectId = Math.random();
   const [mode, setMode] = useState("no-project");
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined,
-    projects: [],
+    projects: [
+      {
+        title: "This is a test Project",
+        description: "Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Ut tincidunt tincidunt erat.",
+        date: "06/10/2024",
+        id: defaultProjectId,
+      },
+    ],
+    tasks: [
+      {
+        name: "This is a sample task",
+        project: defaultProjectId,
+        id: Math.random(),
+      },
+      {
+        name: "This is task #2",
+        project: Math.random(),
+        id: Math.random(),
+      },
+      {
+        name: "This is task #3",
+        project: defaultProjectId,
+        id: Math.random(),
+      },
+    ],
   });
 
   function handleStartAddProject() {
@@ -67,7 +92,22 @@ function App() {
     });
   }
 
-  const { projects } = projectsState;
+  function handleAddTask({ name }) {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        tasks: [
+          ...prevState.tasks,
+          {
+            name: name,
+            project: prevState.selectedProjectId,
+          },
+        ],
+      };
+    });
+  }
+
+  const { projects, tasks } = projectsState;
 
   let content;
   if (projectsState.selectedProjectId === undefined) {
@@ -76,7 +116,7 @@ function App() {
     content = <NewProject onSaveAddProject={handleSaveAddProject} onCancelAddProject={handleCancelAddProject} />;
   } else {
     const currentProject = projects.find((project) => project.id === projectsState.selectedProjectId);
-    content = <SelectedProject project={currentProject} onDelete={handleDeleteProject} />;
+    content = <SelectedProject project={currentProject} tasks={tasks} onDelete={handleDeleteProject} onAddTask={handleAddTask} />;
   }
 
   return (
