@@ -7,10 +7,12 @@ import Product from "./components/Product.jsx";
 import { CartContext } from "./store/shopping-cart-context.jsx";
 
 function App() {
+  // Setting the state
   const [shoppingCart, setShoppingCart] = useState({
     items: [],
   });
 
+  // A Function that handles adding an item to the cart
   function handleAddItemToCart(id) {
     setShoppingCart((prevShoppingCart) => {
       const updatedItems = [...prevShoppingCart.items];
@@ -63,6 +65,7 @@ function App() {
     });
   }
 
+  // an object that contains the items from the state and the Add Items function
   const ctxValue = {
     items: shoppingCart.items,
     addItemToCart: handleAddItemToCart,
