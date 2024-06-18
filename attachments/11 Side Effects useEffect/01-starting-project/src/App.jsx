@@ -7,11 +7,14 @@ import DeleteConfirmation from "./components/DeleteConfirmation.jsx";
 import logoImg from "./assets/logo.png";
 import { sortPlacesByDistance } from "./loc.js";
 
+const storedIds = JSON.parse(localStorage.getItem("selectedPlaces")) || [];
+const storedPlaces = storedIds.map((id) => AVAILABLE_PLACES.find((place) => place.id === id));
+
 function App() {
-  const modal = useRef();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const selectedPlace = useRef();
   const [avalablePlaces, setAvailablePlaces] = useState([]);
-  const [pickedPlaces, setPickedPlaces] = useState([]);
+  const [pickedPlaces, setPickedPlaces] = useState(storedPlaces);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -21,12 +24,12 @@ function App() {
   }, []);
 
   function handleStartRemovePlace(id) {
-    modal.current.open();
+    setIsModalOpen(true);
     selectedPlace.current = id;
   }
 
   function handleStopRemovePlace() {
-    modal.current.close();
+    setIsModalOpen(false);
   }
 
   function handleSelectPlace(id) {
@@ -46,16 +49,26 @@ function App() {
 
   function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) => prevPickedPlaces.filter((place) => place.id !== selectedPlace.current));
-    modal.current.close();
+    setIsModalOpen(false);
+    const storedIds = JSON.parse(localStorage.getItem("selectedPlaces")) || [];
+    const deletedIds = storedIds.filter((id) => id !== selectedPlace.current);
+    console.log(selectedPlace.current, storedIds, deletedIds);
+    localStorage.setItem("selectedPlaces", JSON.stringify(deletedIds));
+  }
+
+  function clearStorage() {
+    localStorage.clear();
+    setPickedPlaces([]);
   }
 
   return (
     <>
-      <Modal ref={modal}>
+      <Modal open={isModalOpen}>
         <DeleteConfirmation onCancel={handleStopRemovePlace} onConfirm={handleRemovePlace} />
       </Modal>
 
       <header>
+        <button onClick={clearStorage}>Clear</button>
         <img src={logoImg} alt="Stylized globe" />
         <h1>PlacePicker</h1>
         <p>Create your personal collection of places you would like to visit or you have visited.</p>
