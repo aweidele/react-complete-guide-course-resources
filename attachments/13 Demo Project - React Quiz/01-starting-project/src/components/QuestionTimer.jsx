@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-export default function QuestionTimer({ timeout = 5000, onTimeout }) {
+export default function QuestionTimer({ timeout = 15000, onTimeout }) {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
@@ -13,15 +13,14 @@ export default function QuestionTimer({ timeout = 5000, onTimeout }) {
 
   useEffect(() => {
     console.log("SETTING INTERVAL");
-    setInterval(() => {
-      setRemainingTime((prevRemainingTime) => prevRemainingTime - 50);
-    }, 50);
+    const interval = setInterval(() => {
+      setRemainingTime((prevRemainingTime) => prevRemainingTime - 10);
+    }, 10);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
-  return (
-    <>
-      <progress max={timeout} value={remainingTime} id="question-time" />
-      <p>{remainingTime}</p>
-    </>
-  );
+  return <progress max={timeout} value={remainingTime} id="question-time" />;
 }
