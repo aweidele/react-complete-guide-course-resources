@@ -3,9 +3,9 @@ import QUESTIONS from "../questions";
 
 import QuestionTimer from "./QuestionTimer";
 import QuizComplete from "./QuizComplete";
+import Answers from "./Answers";
 
 export default function Quiz() {
-  // const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [answerState, setAnswerState] = useState("");
   const [userAnswers, setUserAnswer] = useState([]);
   const activeQuestionIndex = answerState === "" ? userAnswers.length : userAnswers.length - 1;
@@ -14,7 +14,7 @@ export default function Quiz() {
   const handleSelectAnswer = useCallback(
     function handleSelectAnswer(selectedAnswer) {
       setAnswerState("answered");
-      setUserAnswer((prevUserAnswers) => [...prevUserAnswers, { userAnswer: selectedAnswer, correctAnswer: QUESTIONS[activeQuestionIndex].answers[0] }]);
+      setUserAnswer((prevUserAnswers) => [...prevUserAnswers, selectedAnswer]);
 
       setTimeout(() => {
         if (selectedAnswer === QUESTIONS[activeQuestionIndex].answers[0]) {
@@ -25,7 +25,7 @@ export default function Quiz() {
 
         setTimeout(() => {
           setAnswerState("");
-        }, 2000);
+        }, 1000);
       }, 1000);
     },
     [activeQuestionIndex]
@@ -39,41 +39,15 @@ export default function Quiz() {
   }
 
   // Otherwise, continue
-  const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
-  shuffledAnswers.sort(() => Math.random() - 0.5);
 
   return (
     <div id="quiz">
       <div id="question">
+        {/* Combine this into a separate component so the combined component can have a single key */}
         <QuestionTimer key={activeQuestionIndex} onTimeout={handleSkipAnswer} />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
-        <ul id="answers">
-          {shuffledAnswers.map((answer) => {
-            const isSelected = userAnswers[userAnswers.length - 1] === answer;
-            let cssClasses = "";
-            if (answerState === "answered" && isSelected) cssClasses = "selected";
-            if ((answerState === "correct" || answerState === "wrong") && isSelected) cssClasses = answerState;
-            // if (answerState === "correct") cssClasses = "correct";
-            // if (answerState === "wrong") cssClasses = "wrong";
-            return (
-              <li className="answer" key={answer}>
-                {/* {isSelected ? "selected" : "not selected"} */}
-                <button
-                  onClick={() => {
-                    handleSelectAnswer(answer);
-                  }}
-                  className={cssClasses}
-                >
-                  {answer}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        <Answers key={`answers-${activeQuestionIndex}`} answers={QUESTIONS[activeQuestionIndex].answers} selectedAnswer={userAnswers[userAnswers.length - 1]} answerState={answerState} onSelect={handleSelectAnswer} />
       </div>
-      {userAnswers.map((answer, key) => (
-        <div key={`answer-${key}`}>{answer.userAnswer === null ? "No answer given" : answer.userAnswer}</div>
-      ))}
     </div>
   );
 }

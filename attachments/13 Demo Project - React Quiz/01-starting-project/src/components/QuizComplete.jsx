@@ -8,7 +8,7 @@ export default function QuizComplete({ results }) {
       <ul>
         {results.map((result) => (
           <li>
-            <div>{result.userAnswer}</div>
+            <div>{result}</div>
             {/* <div>{result.correctAnswer}</div> */}
           </li>
         ))}
