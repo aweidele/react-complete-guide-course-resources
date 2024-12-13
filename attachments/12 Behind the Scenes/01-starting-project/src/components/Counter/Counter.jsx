@@ -24,6 +24,7 @@ function isPrime(number) {
 }
 
 const Counter = memo(function Counter({ initialCount }) {
+  // Will only re-render if initialCount changes
   log("<Counter /> rendered", 1);
   const initialCountIsPrime = isPrime(initialCount);
 
@@ -54,5 +55,4 @@ const Counter = memo(function Counter({ initialCount }) {
     </section>
   );
 });
-
 export default Counter;
