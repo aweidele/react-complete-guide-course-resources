@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRef } from "react";
+import Input from "./Input";
 
 export default function Login() {
   const email = useRef();
@@ -28,6 +29,7 @@ export default function Login() {
       <h2>Login</h2>
 
       <div className="control-row">
+        {/* <Input label="Email" id="email" type="email" name="email" onChange={(event) => handleInputChange("email", event.target.value)} value={enteredValues.email} onBlur={() => handleInputBlur("email")} /> */}
         <div className="control no-margin">
           <label htmlFor="email">Email</label>
           <input id="email" type="email" name="email" ref={email} />

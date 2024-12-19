@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "./Input";
 export default function Login() {
   const [enteredValues, setEnteredValues] = useState({ email: "", password: "" });
   const [didEdit, setDidEdit] = useState({ email: false, password: false });
@@ -32,16 +33,17 @@ export default function Login() {
       <h2>Login</h2>
 
       <div className="control-row">
-        <div className="control no-margin">
+        <Input label="Email" id="email" type="email" name="email" onChange={(event) => handleInputChange("email", event.target.value)} value={enteredValues.email} onBlur={() => handleInputBlur("email")} />
+        <Input label="Password" id="password" type="password" name="password" onChange={(event) => handleInputChange("password", event.target.value)} value={enteredValues.password} />
+        {/* <div className="control no-margin">
           <label htmlFor="email">Email</label>
           <input id="email" type="email" name="email" onChange={(event) => handleInputChange("email", event.target.value)} value={enteredValues.email} onBlur={() => handleInputBlur("email")} />
           {emailIsInvalid && <div className="control-error">Please enter a valid email</div>}
-        </div>
-
-        <div className="control no-margin">
+        </div> */}
+        {/* <div className="control no-margin">
           <label htmlFor="password">Password</label>
           <input id="password" type="password" name="password" onChange={(event) => handleInputChange("password", event.target.value)} value={enteredValues.password} />
-        </div>
+        </div> */}
       </div>
 
       <p className="form-actions">
