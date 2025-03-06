@@ -1,60 +1,8 @@
 import { useActionState } from "react";
-import { isEmail, isNotEmpty, hasMinLength, isEqualToOtherValue } from "../util/validation";
+//signupAction function does not need to be in the component function, unless it needs access to state variables
+import { signupAction } from "../util/signupAction";
 
 export default function Signup() {
-  // Previous form state and the formData object
-  function signupAction(prevFormState, formData) {
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const confirmPassword = formData.get("confirm-password");
-    const firstName = formData.get("first-name");
-    const lastName = formData.get("last-name");
-    const role = formData.get("role");
-    const terms = formData.get("terms");
-    const acquisitionChannel = formData.getAll("acquisition");
-
-    let errors = [];
-    if (!isEmail(email)) {
-      errors.push("Invalid email address.");
-    }
-    if (!isNotEmpty(password) || !hasMinLength(password, 6)) {
-      errors.push("You must provide a password with at least six characters");
-    }
-    if (!isEqualToOtherValue(password, confirmPassword)) {
-      errors.push("password do not match");
-    }
-    if (!isNotEmpty(firstName) || !isNotEmpty(lastName)) {
-      errors.push("Please provide first and last name");
-    }
-    if (!isNotEmpty(role)) {
-      errors.push("Please select a role");
-    }
-    if (!terms) {
-      errors.push("You must agree to the terms and conditions");
-    }
-    if (acquisitionChannel.length === 0) {
-      errors.push("please select at least one acquisition channel");
-    }
-
-    if (errors.length > 0) {
-      return {
-        errors,
-        enteredValues: {
-          email,
-          password,
-          confirmPassword,
-          firstName,
-          lastName,
-          role,
-          acquisitionChannel,
-          terms,
-        },
-      };
-    }
-
-    return { errors: null };
-  }
-
   const [formState, formAction, pending] = useActionState(signupAction, { errors: null }); // pass it the signup action function and initial state value
 
   return (
