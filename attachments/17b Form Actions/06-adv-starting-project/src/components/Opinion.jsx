@@ -1,4 +1,4 @@
-import { use } from "react";
+import { use, useActionState } from "react";
 import { OpinionsContext } from "../store/opinions-context";
 
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
@@ -12,6 +12,9 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
     await downvoteOpinion(id);
   }
 
+  const [upvoteFormState, upvoteFormAction, upvotePending] = useActionState(upvoteAction, null);
+  const [downvoteFormState, downvoteFormAction, downvotePending] = useActionState(downvoteAction, null);
+
   return (
     <article>
       <header>
@@ -20,7 +23,7 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
       </header>
       <p>{body}</p>
       <form className="votes">
-        <button formAction={upvoteAction}>
+        <button formAction={upvoteFormAction} disabled={upvotePending || downvotePending}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect width="18" height="18" x="3" y="3" rx="2" />
             <path d="m16 12-4-4-4 4" />
@@ -30,7 +33,7 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
 
         <span>{votes}</span>
 
-        <button formAction={downvoteAction}>
+        <button formAction={downvoteFormAction} disabled={upvotePending || downvotePending}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect width="18" height="18" x="3" y="3" rx="2" />
             <path d="M12 8v8" />
