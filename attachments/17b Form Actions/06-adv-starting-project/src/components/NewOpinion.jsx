@@ -1,37 +1,42 @@
-import { useActionState } from "react";
+import { useActionState, use } from "react";
+import { OpinionsContext } from "../store/opinions-context";
 
 function isNotEmpty(value) {
   return value.trim() !== "";
 }
 
-const newOpinionAction = (prevFormState, formData) => {
-  for (const entry of formData.entries()) {
-    const key = entry[0];
-    const value = entry[1];
-    console.log(key, value);
-  }
-  const userName = formData.get("userName");
-  const title = formData.get("title");
-  const body = formData.get("body");
-  const errors = [];
-
-  if (!isNotEmpty(userName)) errors.push("Please provide your name");
-  if (!isNotEmpty(title)) errors.push("Please provide your title");
-  if (!isNotEmpty(body)) errors.push("Please share your opinion");
-
-  if (errors.length > 0) {
-    const submitted = {
-      errors,
-      enteredValues: { userName, title, body },
-    };
-    console.log(submitted);
-    return submitted;
-  }
-
-  return { errors: null };
-};
-
 export function NewOpinion() {
+  const { addOpinion } = use(OpinionsContext);
+
+  const newOpinionAction = async (prevFormState, formData) => {
+    for (const entry of formData.entries()) {
+      const key = entry[0];
+      const value = entry[1];
+      console.log(key, value);
+    }
+    const userName = formData.get("userName");
+    const title = formData.get("title");
+    const body = formData.get("body");
+    const errors = [];
+
+    if (!isNotEmpty(userName)) errors.push("Please provide your name");
+    if (!isNotEmpty(title)) errors.push("Please provide your title");
+    if (!isNotEmpty(body)) errors.push("Please share your opinion");
+
+    if (errors.length > 0) {
+      const submitted = {
+        errors,
+        enteredValues: { userName, title, body },
+      };
+      console.log(submitted);
+      return submitted;
+    }
+
+    await addOpinion({ title, body, userName });
+
+    return { errors: null };
+  };
+
   const [formState, formAction, pending] = useActionState(newOpinionAction, { errors: null });
   return (
     <div id="new-opinion">
