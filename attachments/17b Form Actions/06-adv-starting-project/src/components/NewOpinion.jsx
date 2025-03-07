@@ -1,5 +1,7 @@
 import { useActionState, use } from "react";
 import { OpinionsContext } from "../store/opinions-context";
+import { useFormStatus } from "react-dom";
+import Submit from "./Submit";
 
 function isNotEmpty(value) {
   return value.trim() !== "";
@@ -65,9 +67,7 @@ export function NewOpinion() {
           </ul>
         )}
 
-        <p className="actions">
-          <button type="submit">Submit</button>
-        </p>
+        <Submit />
       </form>
     </div>
   );
