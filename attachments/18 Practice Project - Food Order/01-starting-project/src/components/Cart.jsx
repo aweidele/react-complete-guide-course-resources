@@ -27,7 +27,7 @@ export function Cart() {
         <Button textOnly onClick={handleCloseCart}>
           Close
         </Button>
-        <Button>Go to checkout</Button>
+        {cartCtx.items.length > 0 && <Button>Go to checkout</Button>}
       </p>
     </Modal>
   );
