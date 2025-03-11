@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "items": [
+      { "id": "m1", "name": "Mac & Cheese", "price": "8.99", "description": "Creamy cheddar cheese mixed with perfectly cooked macaroni, topped with crispy breadcrumbs. A classic comfort food.", "image": "images/mac-and-cheese.jpg", "quantity": 2 },
+      { "id": "m2", "name": "Margherita Pizza", "price": "12.99", "description": "A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust.", "image": "images/margherita-pizza.jpg", "quantity": 2 }
+    ],
+    "customer": { "name": "Borb Smulgie", "email": "test@tes.com", "street": "123 street", "postal-code": "12345", "city": "Bababab" },
+    "id": "38.9239293400383"
+  },
+  {
+    "items": [
+      { "id": "m1", "name": "Mac & Cheese", "price": "8.99", "description": "Creamy cheddar cheese mixed with perfectly cooked macaroni, topped with crispy breadcrumbs. A classic comfort food.", "image": "images/mac-and-cheese.jpg", "quantity": 2 },
+      { "id": "m2", "name": "Margherita Pizza", "price": "12.99", "description": "A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust.", "image": "images/margherita-pizza.jpg", "quantity": 2 }
+    ],
+    "customer": { "name": "Borb Smulgie", "email": "test@tes.com", "street": "123 street", "postal-code": "12345", "city": "Bababab" },
+    "id": "600.0985965082019"
+  }
+]
