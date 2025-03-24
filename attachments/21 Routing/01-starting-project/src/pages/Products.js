@@ -1,15 +1,23 @@
 import { Link } from "react-router-dom";
 
+const PRODUCTS = [
+  { id: "product-1", title: "Product 1" },
+  { id: "product-2", title: "Product 2" },
+  { id: "product-3", title: "Product 3" },
+];
+
 export function Products() {
   return (
     <>
       <h1>Products Page</h1>
       <ul>
-        <li>
-          <Link to="/products/product-1">Product 1</Link>
-        </li>
-        <li>Product 2</li>
-        <li>Product 3</li>
+        {PRODUCTS.map((prod) => (
+          <li>
+            <Link key={prod.id} to={`/products/${prod.id}`}>
+              {prod.title}
+            </Link>
+          </li>
+        ))}
       </ul>
     </>
   );
