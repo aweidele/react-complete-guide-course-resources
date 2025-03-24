@@ -13,7 +13,7 @@ export function Products() {
       <ul>
         {PRODUCTS.map((prod) => (
           <li>
-            <Link key={prod.id} to={`/products/${prod.id}`}>
+            <Link key={prod.id} to={prod.id}>
               {prod.title}
             </Link>
           </li>
