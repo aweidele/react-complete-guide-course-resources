@@ -52,8 +52,8 @@ async function loadEvents() {
 export async function eventDetalLoader({ request, params }) {
   const id = params.eventId;
   return {
-    event: loadEvent(id),
-    events: loadEvents(),
+    event: await loadEvent(id), // adding "await" here will wait for loadEvent() to complete before showing the page
+    events: loadEvents(), // while showing the fallback (i.e. "loading events") after page is shown, until loadEvents() is completed
   };
 }
 
