@@ -28,12 +28,6 @@ function EventsPage() {
   //     <EventsList events={events} />
   //   </>
   // );
-
-  return (
-    <>
-      <p>Hello</p>
-    </>
-  );
 }
 
 export default EventsPage;
