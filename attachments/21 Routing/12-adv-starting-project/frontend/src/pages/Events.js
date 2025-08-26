@@ -17,17 +17,6 @@ function EventsPage() {
       </Await>
     </Suspense>
   );
-
-  // if (data.isError) {
-  //   return <p>{data.message}</p>;
-  // }
-
-  // const events = data.events;
-  // return (
-  //   <>
-  //     <EventsList events={events} />
-  //   </>
-  // );
 }
 
 export default EventsPage;
