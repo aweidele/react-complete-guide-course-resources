@@ -6,7 +6,12 @@ import EventItem from "./EventItem.jsx";
 import { fetchEvents } from "../../util/http.js";
 
 export default function NewEventsSection() {
-  const { data, isPending, isError, error } = useQuery({ queryKey: ["events"], queryFn: fetchEvents });
+  const { data, isPending, isError, error } = useQuery({
+    queryKey: ["events"], // if this query key is used elsewhere, React Query will use the same data if it's cached
+    queryFn: fetchEvents, // the fetch function
+    staleTime: 5000, // How long the data remains cached
+    gcTime: 30000,
+  });
   let content;
 
   if (isPending) {
