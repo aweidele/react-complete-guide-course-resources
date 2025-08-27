@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, redirect, useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 
 import Modal from "../UI/Modal.jsx";
@@ -79,4 +79,10 @@ export function loader({ params }) {
   });
 }
 
-export async function action() {}
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const updatedEventData = Object.fromEntries(formData);
+  await updateEvent({ id: params.id, event: updatedEventData });
+  await queryClient.invalidateQueries(["events"]);
+  return redirect("../");
+}
