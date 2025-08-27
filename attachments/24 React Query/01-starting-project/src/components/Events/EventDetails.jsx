@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 
 import LoadingIndicator from "../UI/LoadingIndicator.jsx";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
+import Modal from "../UI/Modal.jsx";
 
 import Header from "../Header.jsx";
 
@@ -10,7 +11,7 @@ import { fetchEvent, deleteEvent, queryClient } from "../../util/http.js";
 import { useState } from "react";
 
 export default function EventDetails() {
-  const [deleteStatus, setDeleteStatus] = useState();
+  const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -27,6 +28,13 @@ export default function EventDetails() {
     },
   });
 
+  const handleStartDelete = () => {
+    setIsDeleting(true);
+  };
+  const handleStopDelete = () => {
+    setIsDeleting(false);
+  };
+
   const handleDelete = () => {
     mutate({ id });
   };
@@ -34,6 +42,20 @@ export default function EventDetails() {
   console.log("DATA", data);
   return (
     <>
+      {isDeleting && (
+        <Modal onClose={handleStopDelete}>
+          <h2>Are you sure?</h2>
+          <p>Are you really really sure??</p>
+          <div className="form-actions">
+            <button className="button-text" onClick={handleStopDelete}>
+              Cancel
+            </button>
+            <button className="button" onClick={handleDelete}>
+              Delete
+            </button>
+          </div>
+        </Modal>
+      )}
       <Outlet />
       <Header>
         <Link to="/events" className="nav-item">
@@ -49,10 +71,9 @@ export default function EventDetails() {
           <header>
             <h1>{data?.title}</h1>
             <nav>
-              <button onClick={handleDelete}>Delete</button>
+              <button onClick={handleStartDelete}>Delete</button>
               <Link to="edit">Edit</Link>
             </nav>
-            {deleteStatus === "error" && <p>Error deleting</p>}
           </header>
           <div id="event-details-content">
             <img src={`http://localhost:3000/${data.image}`} alt="" />
