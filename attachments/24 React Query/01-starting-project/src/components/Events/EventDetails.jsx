@@ -20,7 +20,12 @@ export default function EventDetails() {
     queryFn: ({ signal }) => fetchEvent({ id, signal }),
   });
 
-  const { mutate } = useMutation({
+  const {
+    mutate,
+    isPending: isPendingDeletion,
+    isError: isErrorDeleting,
+    error: deleteError,
+  } = useMutation({
     mutationFn: deleteEvent,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["events"], refetchType: "none" });
@@ -47,13 +52,20 @@ export default function EventDetails() {
           <h2>Are you sure?</h2>
           <p>Are you really really sure??</p>
           <div className="form-actions">
-            <button className="button-text" onClick={handleStopDelete}>
-              Cancel
-            </button>
-            <button className="button" onClick={handleDelete}>
-              Delete
-            </button>
+            {isPendingDeletion ? (
+              <p>Deleting, please wait...</p>
+            ) : (
+              <>
+                <button className="button-text" onClick={handleStopDelete}>
+                  Cancel
+                </button>
+                <button className="button" onClick={handleDelete}>
+                  Delete
+                </button>
+              </>
+            )}
           </div>
+          {isErrorDeleting && <ErrorBlock title="Failed to delete event" message={deleteError.info?.message || "Failed to delete event"} />}
         </Modal>
       )}
       <Outlet />
