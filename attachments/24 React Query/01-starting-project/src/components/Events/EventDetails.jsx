@@ -44,7 +44,6 @@ export default function EventDetails() {
     mutate({ id });
   };
 
-  console.log("DATA", data);
   return (
     <>
       {isDeleting && (
