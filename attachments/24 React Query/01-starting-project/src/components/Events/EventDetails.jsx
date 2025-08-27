@@ -6,7 +6,7 @@ import ErrorBlock from "../UI/ErrorBlock.jsx";
 
 import Header from "../Header.jsx";
 
-import { fetchEvent, deleteEvent } from "../../util/http.js";
+import { fetchEvent, deleteEvent, queryClient } from "../../util/http.js";
 import { useState } from "react";
 
 export default function EventDetails() {
@@ -16,27 +16,19 @@ export default function EventDetails() {
   const { id } = useParams();
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["events", { eventID: id }],
-    queryFn: () => fetchEvent({ id }),
+    queryFn: ({ signal }) => fetchEvent({ id, signal }),
   });
 
-  const {
-    data: deleteData,
-    isPending: deleteIsPending,
-    isError: deleteIsError,
-    error: deleteError,
-  } = useMutation({
-    mutationFn: () => deleteEvent({ id }),
-    enabled: deleteStatus === "deleting",
+  const { mutate } = useMutation({
+    mutationFn: deleteEvent,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["events"] });
       navigate("/events");
     },
   });
 
-  if (deleteIsError) setDeleteStatus("error");
-
   const handleDelete = () => {
-    setDeleteStatus("deleting");
+    mutate({ id });
   };
 
   console.log("DATA", data);
@@ -57,7 +49,7 @@ export default function EventDetails() {
           <header>
             <h1>{data?.title}</h1>
             <nav>
-              {deleteStatus === "deleting" ? <p>Deleting</p> : <button onClick={handleDelete}>Delete</button>}
+              <button onClick={handleDelete}>Delete</button>
               <Link to="edit">Edit</Link>
             </nav>
             {deleteStatus === "error" && <p>Error deleting</p>}
