@@ -11,7 +11,7 @@ export default function EditEvent() {
   const { id } = useParams();
   console.log(id);
 
-  const { data, isPending, isError, error } = useQuery({
+  const { data, isError, error } = useQuery({
     queryKey: ["events", { eventID: id }],
     queryFn: ({ signal }) => fetchEvent({ id, signal }),
   });
@@ -71,3 +71,12 @@ export default function EditEvent() {
     </Modal>
   );
 }
+
+export function loader({ params }) {
+  return queryClient.fetchQuery({
+    queryKey: ["events", { eventID: params.id }],
+    queryFn: ({ signal }) => fetchEvent({ id: params.id, signal }),
+  });
+}
+
+export async function action() {}
