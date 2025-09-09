@@ -19,10 +19,11 @@ function insertAtBeginning<T>(array: T[], value: T) {
 }
 
 const demoArray = [1, 2, 3];
-const udpatedArray = insertAtBeginning(demoArray, 0);
+const numArray = insertAtBeginning(demoArray, 0); // number[]
+const strArray = insertAtBeginning(["b", "c", "d"], "a"); // string[]
 // This gets an error because numbers were passed to the function, and therefore got an
 // array of numbers back.
-udpatedArray[0].split("");
+numArray[0].split("");
 
 // Primitives
 let age: number;
