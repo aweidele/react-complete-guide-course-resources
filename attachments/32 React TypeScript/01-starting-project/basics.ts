@@ -1,3 +1,13 @@
+// Function types, parameters
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+function printo(value: any) {
+  // (This function will be of type void)
+  console.log(value);
+}
+
 // Primitives
 let age: number;
 let userName: string;
@@ -42,5 +52,3 @@ course = 1234; // <- Can't reassign value to a variable of a different type, whi
 // Union Types (multiple types)
 let course2: string | number = "React - The complete guide";
 course2 = 12345;
-
-// Function types, parameters
