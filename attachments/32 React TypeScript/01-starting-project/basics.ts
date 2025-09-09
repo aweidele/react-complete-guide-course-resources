@@ -8,6 +8,15 @@ function printo(value: any) {
   console.log(value);
 }
 
+// Generics
+function insertAtBeginning(array: any[], value: any) {
+  const newArray = [value, ...array];
+  return newArray;
+}
+
+const demoArray = [1, 2, 3];
+const udpatedArray = insertAtBeginning(demoArray, 0);
+
 // Primitives
 let age: number;
 let userName: string;
