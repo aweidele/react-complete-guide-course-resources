@@ -26,4 +26,8 @@ let people: {
   age: number;
 }[]; // An array of objects
 
+// Type inference
+let course = "React - The complete guide";
+course = 1234; // <- Can't reassign value to a variable of a different type, which was assigned via type inference
+
 // Function types, parameters
