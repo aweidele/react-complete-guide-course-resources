@@ -11,20 +11,29 @@ console.log(age, userName, isInstructor);
 let hobbies: string[];
 hobbies = ["Baseball", "Cooking", "Beer"];
 
-let person: {
+type Person = {
   name: string;
   age: number;
 };
+
+let person: Person;
 
 person = {
   name: "Chickenboy",
   age: 30,
 };
 
-let people: {
-  name: string;
-  age: number;
-}[]; // An array of objects
+let people: Person[]; // An array of objects
+people = [
+  {
+    name: "Chickenboy",
+    age: 30,
+  },
+  {
+    name: "Pizzaface",
+    age: 50,
+  },
+];
 
 // Type inference
 let course = "React - The complete guide";
