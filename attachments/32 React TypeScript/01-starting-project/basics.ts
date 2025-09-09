@@ -9,13 +9,20 @@ function printo(value: any) {
 }
 
 // Generics
-function insertAtBeginning(array: any[], value: any) {
+// Adding the <T> after the function adds a generic type, which can be used with the parameters.
+// The first param needs to be an array of type "T", the second param needs to be of type "T"
+// It will return at array of type "T".
+
+function insertAtBeginning<T>(array: T[], value: T) {
   const newArray = [value, ...array];
   return newArray;
 }
 
 const demoArray = [1, 2, 3];
 const udpatedArray = insertAtBeginning(demoArray, 0);
+// This gets an error because numbers were passed to the function, and therefore got an
+// array of numbers back.
+udpatedArray[0].split("");
 
 // Primitives
 let age: number;
