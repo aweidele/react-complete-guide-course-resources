@@ -4,11 +4,11 @@ import classes from "./Todos.module.css";
 
 // Add the React Functional Component as the type for the function
 // Angled bracket plugs in a concrete value
-export const Todos: React.FC<{ items: Todo[] }> = (props) => {
+export const Todos: React.FC<{ items: Todo[]; onRemoveTodo: (id: string) => void }> = (props) => {
   return (
     <ul className={classes.todo}>
       {props.items.map((item) => (
-        <TodoItem key={item.id} text={item.text} />
+        <TodoItem key={item.id} text={item.text} onRemoveTodo={props.onRemoveTodo.bind(null, item.id)} />
       ))}
     </ul>
   );
