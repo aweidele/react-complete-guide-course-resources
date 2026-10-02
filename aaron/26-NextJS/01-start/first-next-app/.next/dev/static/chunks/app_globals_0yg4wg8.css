@@ -1,0 +1,54 @@
+@import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:wght@400;700&display=swap";
+/* [project]/app/globals.css [app-client] (css) */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-family: Open Sans, sans-serif;
+}
+
+body {
+  color: #ddd8e4;
+  background: linear-gradient(#232029, #231e2d);
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  text-align: center;
+  margin: 5rem auto;
+}
+
+main img {
+  object-fit: cover;
+  filter: drop-shadow(0 0 4px #f6c363);
+  width: 8rem;
+  height: 8rem;
+}
+
+h1 {
+  color: #ede9f3;
+  margin: 3rem auto;
+  font-family: Poppins, sans-serif;
+  font-size: 3rem;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+p a {
+  color: #f4c33d;
+  border-bottom: 2px solid #f4c33d;
+  padding-bottom: .05rem;
+  text-decoration: none;
+}
+
+p a:hover, p a:active {
+  color: #bd3df4;
+  border-color: #bd3df4;
+}
+
+/*# sourceMappingURL=app_globals_0yg4wg8.css.map*/

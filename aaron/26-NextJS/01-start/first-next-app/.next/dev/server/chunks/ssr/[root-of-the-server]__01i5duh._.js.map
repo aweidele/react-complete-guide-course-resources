@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///Users/aaronweidele/Documents/Projects/Courses/React/Udemy/react-complete-guide-course-resources/aaron/26-NextJS/01-start/first-next-app/app/about/page.js"],"sourcesContent":["export default function AboutPage() {\n  return <h1>About Us</h1>\n}"],"names":["AboutPage"],"mappings":";;;;;;AAAe,SAASA;IACtB,qBAAO,8OAAC;kBAAG;;;;;;AACb"}},
+    {"offset": {"line": 36, "column": 0}, "map": {"version":3,"sources":["file:///Users/aaronweidele/Documents/Projects/Courses/React/Udemy/react-complete-guide-course-resources/aaron/26-NextJS/01-start/first-next-app/app/favicon.ico.mjs%20(structured%20image%20object)"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 256, height: 256 }\n"],"names":["src","width","height"],"mappings":";;;;AAAA;;uCACe;IAAEA,KAAAA,mIAAG;IAAEC,OAAO;IAAKC,QAAQ;AAAI"}},
+    {"offset": {"line": 54, "column": 0}, "map": {"version":3,"sources":["file:///Users/aaronweidele/Documents/Projects/Courses/React/Udemy/react-complete-guide-course-resources/aaron/26-NextJS/01-start/first-next-app/app/icon.png.mjs%20(structured%20image%20object)"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 500, height: 486 }\n"],"names":["src","width","height"],"mappings":";;;;AAAA;;uCACe;IAAEA,KAAAA,gIAAG;IAAEC,OAAO;IAAKC,QAAQ;AAAI"}}]
+}
