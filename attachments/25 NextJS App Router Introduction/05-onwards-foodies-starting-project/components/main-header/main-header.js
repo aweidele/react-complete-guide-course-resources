@@ -1,8 +1,9 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import logoImg from "@/assets/logo.png";
 import mainHeaderCLasses from "./main-header.module.css";
 import MainHeaderBackground from "./main-header-background";
+import NavLink from "./nav-link";
 
 const MainHeader = () => {
   return (
@@ -17,10 +18,12 @@ const MainHeader = () => {
         <nav className={mainHeaderCLasses.nav}>
           <ul>
             <li>
-              <Link href="/meals">Browse Meals</Link>
+              {/* Use client components as far down the compoent tree as possible, to reduce how much
+                  is executed client side */}
+              <NavLink href="/meals">Browse Meals</NavLink>
             </li>
             <li>
-              <Link href="/communities">Foodies</Link>
+              <NavLink href="/community">Foodies</NavLink>
             </li>
           </ul>
         </nav>
