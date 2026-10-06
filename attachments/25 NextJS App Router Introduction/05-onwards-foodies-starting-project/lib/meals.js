@@ -6,3 +6,8 @@ export const getMeals = async () => {
   // throw new Error("Loading failed");
   return db.prepare("SELECT * FROM meals").all();
 };
+
+export const getMeal = async (slug) => {
+  // Adding the ? is more secure.
+  return db.prepare('SELECT * FROM meals WHERE slug = ?').get(slug);
+}
