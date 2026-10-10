@@ -7,7 +7,6 @@ import classes from "./image-picker.module.css";
 const ImagePicker = ({ label, name = "image" }) => {
   const imageInput = useRef();
   const [pickedImage, setPickedImage] = useState(null);
-  console.log(pickedImage);
 
   const handlePickClick = () => {
     imageInput.current.click();
@@ -32,9 +31,18 @@ const ImagePicker = ({ label, name = "image" }) => {
       <div className={classes.controls}>
         <div className={classes.preview}>
           {!pickedImage && <p>No image selected yet</p>}
-          {pickedImage && <Image src={pickedImage} fill />}
+          {pickedImage && <Image src={pickedImage} fill alt="" />}
         </div>
-        <input className={classes.input} type="file" id={name} accept="image/png, image/jpeg" name={name} ref={imageInput} onChange={handleImageChange} />
+        <input
+          className={classes.input}
+          type="file"
+          id={name}
+          accept="image/png, image/jpeg"
+          name={name}
+          ref={imageInput}
+          onChange={handleImageChange}
+          required
+        />
         <button className={classes.button} type="button" onClick={handlePickClick}>
           Pick an image
         </button>
