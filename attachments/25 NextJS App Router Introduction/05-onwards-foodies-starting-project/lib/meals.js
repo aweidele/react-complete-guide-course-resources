@@ -23,6 +23,7 @@ export const saveMeal = async (meal) => {
   const extension = meal.image.name.split(".").pop();
   const fileName = `${meal.slug}-${crypto.randomUUID()}.${extension}`;
 
+  // Uploading image
   const stream = fs.createWriteStream(`public/images/${fileName}`);
   const bufferedImage = await meal.image.arrayBuffer();
   stream.write(Buffer.from(bufferedImage), (error) => {
